@@ -9,17 +9,49 @@
             --primary: #5a2ca0;
             --primary-active: #391c64;
             --primary-bg: #c6afe9;
+            --body-bg: white;
+            --main-logo: url('logo-roxo.png');
+            --emoji-theme: '🌑';
         }
 
         .theme-green {
             --primary: #88aa00;
             --primary-active: #526600;
             --primary-bg: #eeffaa;
+            --body-bg: #555;
+            --main-logo: url('logo.png');
+            --emoji-theme: '🌞';
+        }
+
+        body {
+            background-color: var(--body-bg);
+        }
+
+        #logo {
+            width: 250px;
+            height: 150px;
+            background-image: var(--main-logo);
+            background-repeat: no-repeat;
+            background-size: contain;
         }
 
         #main-logo {
             width: 300px;
-        }   
+        }
+
+        #theme {
+            visibility: hidden;
+            width: 30px;
+            height: 30px;
+            margin: 12px;
+
+        }
+
+        #theme::after {
+            visibility: visible;
+            font-size: 1.5rem;
+            content: var(--emoji-theme);
+        }
 
         .container {
             position: relative;
@@ -69,13 +101,14 @@
     <title>Document</title>
 </head>
 <body class="theme-purple">
-    <img id="main-logo" src="logo-roxo.png" alt="">
+    <!-- <img id="main-logo" src="logo-roxo.png" alt=""> -->
+    <div id="logo"></div>
+    <input type="checkbox" name="theme" id="theme">
     <div class="container sidebar">
         <p>Dados escritos no containe</p>
         <p><a href="http://google.com">Google</a></p>
         <p>Dados escritos no containe</p>
     </div>
-
     <div class="container sidebar">
         <ul class="menu">
             <li class="menu-item">Item 01</li>
@@ -83,6 +116,24 @@
             <li class="menu-item">Item 03</li>
         </ul>
     </div>
+    <script>
+        /* 
+        * true = dark
+        * false = light
+        */
+        var themeCheckbox = document.getElementById('theme');
 
+        themeCheckbox.addEventListener('click', function (element) {
+            let body = document.getElementsByTagName('body')[0];
+
+            if (element.target.checked) {
+                body.classList.remove('theme-purple')
+                body.classList.add('theme-green')
+            } else {
+                body.classList.remove('theme-green')
+                body.classList.add('theme-purple')
+            }
+        })
+    </script>
 </body>
 </html>
